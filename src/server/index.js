@@ -51,14 +51,17 @@ async function evaluateNews(req, res) {
     });
   } catch (err) {
     console.log("ERR ===>✨✨✨", err.message);
+    res.send("Please ensure sending a correct URL Article");
   }
 }
 
 // designates what port the app will listen to for incoming requests
-app.listen(8082, function () {
+const server = app.listen(8082, function () {
   console.log("Example app listening on port 8082!");
 });
 
 app.get("/test", function (req, res) {
   res.send(mockAPIResponse);
 });
+
+module.exports = server;

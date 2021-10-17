@@ -7,12 +7,17 @@ const postData = async (formText) => {
     const { data } = await axios.post("http://localhost:8082/evaluate_news", {
       data: formText,
     });
-    const innerHTML = `<li id="text"><i>Text</i>: ${data.text}</li>
+    let innerHTML = `<li id="text"><i>Text</i>: ${data.text}</li>
       <li id="score"><i>Score</i>: ${data.score}</li>
       <li id="agreement"><i>Agreement</i>: ${data.agreement}</li>
       <li id="subjectivity"><i>Subjectivity</i>: ${data.subjectivity}</li>
       <li id="confidence"><i>Confidence</i>: ${data.confidence}</li>
       <li id="irony"><i>Irony</i>: ${data.irony}</li>`;
+    // Guard Clause
+    if (data.score === undefined && data.text === undefined) {
+      innerHTML = `<li class='error' id="text"><i>Error</i>: ${data}</li>`;
+      return formResult.insertAdjacentHTML("afterend", innerHTML);
+    }
     formResult.insertAdjacentHTML("afterend", innerHTML);
   } catch (err) {
     console.log("Err =>>✨✨", err.message);

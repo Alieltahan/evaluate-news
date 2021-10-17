@@ -20,6 +20,10 @@ module.exports = {
         test: /\.scss$/,
         use: ["style-loader", "css-loader", "sass-loader"],
       },
+      {
+        test: /\.svg$/,
+        loader: "svg-inline-loader",
+      },
     ],
   },
   plugins: [
@@ -27,7 +31,7 @@ module.exports = {
       // Simulate the removal of files
       dry: true,
       // Write Logs to Console
-      verbose: true,
+      verbose: false,
       // Automatically remove all unused webpack assets on rebuild
       cleanStaleWebpackAssets: true,
       protectWebpackAssets: false,

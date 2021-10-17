@@ -1,1 +1,8 @@
-
+footer {
+  display: flex;
+  justify-content: center;
+  text-decoration: double;
+  & p {
+    color: rgb(70, 40, 40);
+  }
+}
