@@ -8,7 +8,6 @@
   <body>
     <header>
       <div class="">Logo</div>
-      <div class="">navigation</div>
     </header>
 
     <main>
@@ -19,27 +18,31 @@
             type="text"
             name="input"
             value=""
-            onblur="onBlur()"
-            placeholder="Name"
+            onblur=''
+            placeholder="Please enter URL"
           />
-          <input
+          <button
+          class="btn"
             type="submit"
             name=""
             value="submit"
             onclick="return Client.handleSubmit(event)"
             onsubmit="return Client.handleSubmit(event)"
-          />
+          >Submit</button>
+
         </form>
       </section>
-
       <section>
-        <strong>Form Results:</strong>
-        <div id="results"></div>
+        <strong><ul id="result">
+          Form Results:</strong>
+
+        </ul> 
       </section>
     </main>
 
     <footer>
-      <p>This is a footer</p>
+    <p>Ali Eltahan &copy; - 2021</p>
+        
     </footer>
     <!-- <script>
       // Check that service workers are supported

@@ -1,26 +1,33 @@
 import { checkURL } from "./checkURL";
-const SERVER_URL = `https://api.meaningcloud.com/sentiment-2.1`;
-import axios from "axios";
+const axios = require("axios").default;
+
+const formResult = document.getElementById("result");
+const postData = async (formText) => {
+  try {
+    const { data } = await axios.post("http://localhost:8082/evaluate_news", {
+      data: formText,
+    });
+    const innerHTML = `<li id="text"><i>Text</i>: ${data.text}</li>
+      <li id="score"><i>Score</i>: ${data.score}</li>
+      <li id="agreement"><i>Agreement</i>: ${data.agreement}</li>
+      <li id="subjectivity"><i>Subjectivity</i>: ${data.subjectivity}</li>
+      <li id="confidence"><i>Confidence</i>: ${data.confidence}</li>
+      <li id="irony"><i>Irony</i>: ${data.irony}</li>`;
+    formResult.insertAdjacentHTML("afterend", innerHTML);
+  } catch (err) {
+    console.log("Err =>>✨✨", err.message);
+  }
+};
 
 function handleSubmit(event) {
   event.preventDefault();
-
   // check what text was put into the form field
   let formText = document.getElementById("name").value;
-  console.log(checkURL(formText), "@Form Handler");
   // Guard Clause if invalid URL
   if (!checkURL(formText)) return alert("Please enter a valid URL");
   console.log("::: Form Submitted :::");
-  axios({
-    method: "post",
-    url: "http://localhost:8082/evaluate_news",
-    data: { url: formText },
-  });
-  fetch("http://localhost:8082/test")
-    .then((res) => res.json())
-    .then(function (res) {
-      document.getElementById("results").innerHTML = res.message;
-    });
+  // Posting to the Server & Getting the response
+  postData(formText);
 }
 
 export { handleSubmit };
