@@ -42,7 +42,7 @@ module.exports = {
       protectWebpackAssets: false,
     }),
     // for Service Worker
-    // new WorkboxPlugin.GenerateSW(),
+    new WorkboxPlugin.GenerateSW(),
     new MiniCssExtractPlugin({ filename: "[name].css" }),
   ],
   optimization: {
